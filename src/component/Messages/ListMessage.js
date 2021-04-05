@@ -13,7 +13,7 @@ import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles({
   messageArea: {
-    height: "70vh",
+    height: "60vh",
     overflowY: "auto",
   },
 });
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 function ListMessage() {
   const classes = useStyles();
   return (
-    <Grid item xs={9}>
+    <Grid item xs={12}>
       <List className={classes.messageArea}>
         <ListItem key="1">
           <Grid container>
@@ -54,11 +54,24 @@ function ListMessage() {
             <Grid item xs={12}>
               <ListItemText
                 align="right"
-                primary="Cool. i am good, let's catch up!"
+                primary="Hey, Iam Good! What about you ?"
               ></ListItemText>
             </Grid>
             <Grid item xs={12}>
-              <ListItemText align="right" secondary="10:30"></ListItemText>
+              <ListItemText align="right" secondary="09:31"></ListItemText>
+            </Grid>
+          </Grid>
+        </ListItem>
+        <ListItem key="4">
+          <Grid container>
+            <Grid item xs={12}>
+              <ListItemText
+                align="left"
+                primary="Hey, Iam Good! What about you ?"
+              ></ListItemText>
+            </Grid>
+            <Grid item xs={12}>
+              <ListItemText align="left" secondary="09:31"></ListItemText>
             </Grid>
           </Grid>
         </ListItem>
