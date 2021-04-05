@@ -2,13 +2,20 @@ import React from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
+  Avatar,
   IconButton,
   InputBase,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import firebase from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -53,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -64,40 +70,92 @@ const useStyles = makeStyles((theme) => ({
 }));
 function MetaPanel() {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [theme, setTheme] = React.useState(false);
+  const isMenuOpen = Boolean(anchorEl);
+  const user = useSelector((state) => state.user.currentUser);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleSignout = () => {
+    setAnchorEl(null);
+    firebase
+      .auth()
+      .signOut()
+      .then(() => console.log("sign out"));
+  };
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem
+        onClick={() => console.log(user)}
+        style={{ color: "gray" }}
+      >{`Signed in us ${user.displayName}`}</MenuItem>
+      <MenuItem>Change Avatar</MenuItem>
+      <MenuItem onClick={handleSignout}>Sign Out</MenuItem>
+    </Menu>
+  );
   return (
-    <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar>
-        <Typography variant="h6" noWrap>
-          Slack
-        </Typography>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
+    <>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" noWrap>
+            Slack
+          </Typography>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ "aria-label": "search" }}
-          />
-        </div>
-        <div className={classes.grow} />
-        <div className={classes.sectionDesktop}>
-          <IconButton
-            edge="end"
-            aria-label="account of current user"
-            // aria-controls={menuId}
-            aria-haspopup="true"
-            // onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-        </div>
-      </Toolbar>
-    </AppBar>
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <IconButton color="inherit" onClick={() => setTheme(!theme)}>
+              {theme ? (
+                <Brightness4Icon fontSize="default" />
+              ) : (
+                <Brightness7Icon fontSize="default" />
+              )}
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <Avatar alt="name" src={user.photoURL} />
+              <div>
+                <Typography>{user.displayName}</Typography>
+                <ArrowDropDownIcon />
+              </div>
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+      {renderMenu}
+    </>
   );
 }
 

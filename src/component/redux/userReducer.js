@@ -1,4 +1,4 @@
-import { SET_USER } from "./types";
+import { CLEAR_USER, SET_USER } from "./types";
 
 const initialState = {
   currentUser: null,
@@ -12,7 +12,11 @@ const userReducer = (state = initialState, { type, payload }) => {
         currentUser: payload.currentUser,
         isLoading: false,
       };
-
+    case CLEAR_USER:
+      return {
+        currentUser: null,
+        isLoading: false,
+      };
     default:
       return state;
   }

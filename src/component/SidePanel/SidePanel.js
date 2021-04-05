@@ -1,16 +1,8 @@
-import {
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-} from "@material-ui/core";
+import { Divider, Drawer, Toolbar } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import ListMain from "./ListMain";
+import Channels from "./Channels";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -42,18 +34,9 @@ function SidePanel() {
     >
       <Toolbar />
       <div className={classes.drawerContainer}>
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon style={{ color: "white" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <ListMain />
         <Divider />
-
+        <Channels />
         <Divider />
       </div>
     </Drawer>

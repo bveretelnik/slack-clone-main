@@ -1,6 +1,5 @@
 import "./App.css";
 import { makeStyles } from "@material-ui/core/styles";
-import ColorPanel from "./ColorPanel/ColorPanel";
 import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
 import MetaPanel from "./MetaPanel/MetaPanel";

@@ -15,7 +15,7 @@ import { Provider, connect, useDispatch, useSelector } from "react-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { rootReducer } from "./component/redux/rootReducer";
-import { setUser } from "./component/redux/actions";
+import { setUser, clearUser } from "./component/redux/actions";
 import Spinner from "./component/Spinner";
 
 const store = createStore(
@@ -35,6 +35,9 @@ function Root() {
       if (user) {
         dispatch(setUser(user));
         history.push("/");
+      } else {
+        history.push("/login");
+        dispatch(clearUser());
       }
     });
   }, [history]);
@@ -56,6 +59,7 @@ function Root() {
 
 const mapDispatchToProps = {
   setUser,
+  clearUser,
 };
 connect(null, mapDispatchToProps)(Root);
 
