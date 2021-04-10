@@ -1,15 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Divider,
-  Fab,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  TextField,
-} from "@material-ui/core";
-import SendIcon from "@material-ui/icons/Send";
+import { Avatar, Grid, List, ListItem, ListItemText } from "@material-ui/core";
 
 const useStyles = makeStyles({
   messageArea: {
@@ -26,10 +17,15 @@ function ListMessage() {
         <ListItem key="1">
           <Grid container>
             <Grid item xs={12}>
-              <ListItemText
-                align="right"
-                primary="Hey man, What's up ?"
-              ></ListItemText>
+              <div>
+                <Avatar alignItem="right" style={{ background: "orange" }}>
+                  H
+                </Avatar>
+                <ListItemText
+                  align="right"
+                  primary="Hey man, What's up ?"
+                ></ListItemText>
+              </div>
             </Grid>
             <Grid item xs={12}>
               <ListItemText align="right" secondary="09:30"></ListItemText>
@@ -39,6 +35,7 @@ function ListMessage() {
         <ListItem key="2">
           <Grid container>
             <Grid item xs={12}>
+              <Avatar align="left">H</Avatar>
               <ListItemText
                 align="left"
                 primary="Hey, Iam Good! What about you ?"
@@ -76,21 +73,6 @@ function ListMessage() {
           </Grid>
         </ListItem>
       </List>
-      <Divider />
-      <Grid container style={{ padding: "20px" }}>
-        <Grid item xs={11}>
-          <TextField
-            id="outlined-basic-email"
-            label="Type Something"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={1} align="right">
-          <Fab color="default" aria-label="add">
-            <SendIcon style={{ color: "#3F0E40" }} />
-          </Fab>
-        </Grid>
-      </Grid>
     </Grid>
   );
 }

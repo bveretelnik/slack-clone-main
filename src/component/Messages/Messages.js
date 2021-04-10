@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Toolbar } from "@material-ui/core";
+import { Divider, Toolbar } from "@material-ui/core";
 import ListMessage from "./ListMessage";
+import InputMessage from "./InputMessage";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -15,6 +16,8 @@ function Messages() {
     <main className={classes.content}>
       <Toolbar />
       <ListMessage />
+      <Divider />
+      <InputMessage />
     </main>
   );
 }

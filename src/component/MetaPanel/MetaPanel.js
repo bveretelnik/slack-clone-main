@@ -78,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
 function MetaPanel() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [theme, setTheme] = React.useState(false);
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
   const isMenuOpen = Boolean(anchorEl);
