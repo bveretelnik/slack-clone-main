@@ -1,6 +1,7 @@
 import { Divider, Drawer, Toolbar } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 import ListMain from "./ListMain";
 import Channels from "./Channels";
 
@@ -10,30 +11,46 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
   },
-  drawerPaper: {
+  drawerPaperP: {
     width: drawerWidth,
     background: "#350d36",
+    transition: "background 1s ease",
   },
-  drawerContainer: {
+  drawerPaperB: {
+    width: drawerWidth,
+    background: "black",
+    transition: "background 1s ease",
+  },
+  drawerContainerP: {
     overflow: "auto",
     background: "#350d36",
+    transition: "background 1s ease",
+    color: "white",
+  },
+  drawerContainerB: {
+    overflow: "auto",
+    background: "black",
+    transition: "background 1s ease",
     color: "white",
   },
 }));
 
 function SidePanel() {
   const classes = useStyles();
+  const theme = useSelector((state) => state.theme.theme);
 
   return (
     <Drawer
       className={classes.drawer}
       variant="permanent"
       classes={{
-        paper: classes.drawerPaper,
+        paper: theme ? classes.drawerPaperP : classes.drawerPaperB,
       }}
     >
       <Toolbar />
-      <div className={classes.drawerContainer}>
+      <div
+        className={theme ? classes.drawerContainerP : classes.drawerContainerB}
+      >
         <ListMain />
         <Divider />
         <Channels />

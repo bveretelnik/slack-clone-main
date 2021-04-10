@@ -13,16 +13,14 @@ function ListMain() {
   return (
     <>
       <List>
-        {["Threads", "All DMs", "Mention & reactions", "More"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon style={{ color: "#E5DDD1" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} style={{ color: "#E5DDD1" }} />
-            </ListItem>
-          )
-        )}
+        {["Threads", "All DMs"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon style={{ color: "#E5DDD1" }}>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} style={{ color: "#E5DDD1" }} />
+          </ListItem>
+        ))}
       </List>
       <Divider />
     </>

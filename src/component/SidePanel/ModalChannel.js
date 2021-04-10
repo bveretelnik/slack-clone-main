@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ModalChannel({ handleClose, open }) {
+function ModalChannel({ handleClose, open, handleChange, handleSubmit }) {
   const classes = useStyles();
 
   return (
@@ -45,16 +45,18 @@ function ModalChannel({ handleClose, open }) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Add Channel</h2>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={handleSubmit}>
               <TextField
                 style={{ margin: "10px" }}
-                id="standard-basic"
                 label="Name of Channel"
+                name="channelName"
+                onChange={handleChange}
               />
               <TextField
                 style={{ margin: "10px" }}
-                id="standard-basic"
                 label="About the Channel"
+                name="channelDetails"
+                onChange={handleChange}
               />
             </form>
             <div className={classes.button}>
@@ -68,6 +70,7 @@ function ModalChannel({ handleClose, open }) {
               <Button
                 variant="outlined"
                 style={{ color: "green", margin: "5px" }}
+                onClick={handleSubmit}
               >
                 Add
               </Button>

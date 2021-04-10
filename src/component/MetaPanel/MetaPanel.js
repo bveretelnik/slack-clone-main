@@ -10,12 +10,13 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import firebase from "../../firebase";
+import { changeTheme } from "../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -27,9 +28,15 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
-  appBar: {
+  appBarP: {
     zIndex: theme.zIndex.drawer + 1,
     background: "#3F0E40",
+    transition: "background 1s ease",
+  },
+  appBarB: {
+    zIndex: theme.zIndex.drawer + 1,
+    background: "black",
+    transition: "background 1s ease",
   },
   search: {
     position: "relative",
@@ -71,7 +78,9 @@ const useStyles = makeStyles((theme) => ({
 function MetaPanel() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [theme, setTheme] = React.useState(false);
+  // const [theme, setTheme] = React.useState(false);
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
   const isMenuOpen = Boolean(anchorEl);
   const user = useSelector((state) => state.user.currentUser);
 
@@ -110,7 +119,10 @@ function MetaPanel() {
   );
   return (
     <>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar
+        position="fixed"
+        className={theme ? classes.appBarP : classes.appBarB}
+      >
         <Toolbar>
           <Typography variant="h6" noWrap>
             Slack
@@ -130,7 +142,7 @@ function MetaPanel() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit" onClick={() => setTheme(!theme)}>
+            <IconButton color="inherit" onClick={() => dispatch(changeTheme())}>
               {theme ? (
                 <Brightness4Icon fontSize="default" />
               ) : (
@@ -159,4 +171,4 @@ function MetaPanel() {
   );
 }
 
-export default MetaPanel;
+export default connect(null, { changeTheme })(MetaPanel);
