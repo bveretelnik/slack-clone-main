@@ -9,7 +9,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { green, orange, purple } from "@material-ui/core/colors";
-import { useSelector } from "react-redux";
+
 import firebase from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,15 +30,14 @@ const theme = createMuiTheme({
   },
 });
 
-function InputMessage({ messageRef }) {
+function InputMessage({ messageRef, user, channel }) {
   const initialState = {
     message: "",
     loading: false,
     errors: [],
   };
   const classes = useStyles();
-  const user = useSelector((state) => state.user.currentUser);
-  const channel = useSelector((state) => state.channel.currentChannel);
+
   const [state, setState] = useState(initialState);
 
   const handleChange = (e) => {

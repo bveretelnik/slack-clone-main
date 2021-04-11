@@ -29,7 +29,7 @@ function Channels() {
 
   useEffect(() => {
     addListener();
-    return () => {
+    return function () {
       removeListener();
     };
   }, []);
@@ -46,7 +46,7 @@ function Channels() {
     });
   };
   const removeListener = () => {
-    state.channelsRef.of();
+    state.channelsRef.off();
   };
   const setFirstChannel = () => {
     const firstChannel = state.channels[0];
