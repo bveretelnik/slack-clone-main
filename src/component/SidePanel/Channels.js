@@ -32,10 +32,12 @@ function Channels() {
     return function () {
       removeListener();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setFirstChannel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   const addListener = () => {

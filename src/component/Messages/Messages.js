@@ -29,6 +29,7 @@ function Messages() {
       addListener(channel.id);
       console.log(state.messages);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channel]);
 
   const addListener = (channelId) => {
@@ -38,11 +39,11 @@ function Messages() {
     let loadedMessages = [];
     state.messageRef.child(channelId).on("child_added", (snap) => {
       loadedMessages.push(snap.val());
-      setState({
-        ...state,
-        messages: loadedMessages,
-        messagesLoading: false,
-      });
+    });
+    setState({
+      ...state,
+      messages: loadedMessages,
+      messagesLoading: false,
     });
   };
   const { messageRef, messages } = state;

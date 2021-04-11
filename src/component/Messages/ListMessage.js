@@ -1,7 +1,6 @@
 import React from "react";
 import "./ListMessage.css";
-import ReactEmoji from "react-emoji";
-import moment from "moment";
+// import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, List } from "@material-ui/core";
 
@@ -18,7 +17,7 @@ function ListMessage({ user, messages }) {
   const isOwnMessage = (message, user) => {
     return message.user.id === user.uid;
   };
-  const timeFromNow = (timestamp) => moment(timestamp).fromNow();
+  // const timeFromNow = (timestamp) => moment(timestamp).fromNow();
   return (
     <Grid item xs={12}>
       <List className={classes.messageArea}>
@@ -51,7 +50,7 @@ function ListMessage({ user, messages }) {
             </div>
           ))
         ) : (
-          <p className="sentText pr-10">chat is empti</p>
+          <p className="sentText pr-10">chat is empty</p>
         )}
       </List>
     </Grid>
